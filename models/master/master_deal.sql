@@ -92,6 +92,22 @@ owner_reassignments as (
         and new_value is not null
     group by deal_id
 ),
+lost_reason as 
+( 
+    select sd.*, 
+    sf.lost_label,
+    row_number() over (partition by sd.deal_id order by sd.change_time_at asc) as rn
+    from {{ ref('stg_deal_changes') }} sd 
+    left join {{ ref('stg_lost_fields') }} sf on sd.new_value = sf.lost_id
+    where changed_field_key = 'lost_reason'
+),
+lost_reason_agg as
+(
+select * 
+from lost_reason
+where rn = 1
+)
+,
 -- Aggregate activities on the deal
 activity_summary as (
     select
@@ -128,6 +144,7 @@ final_combined as (
         dcs.last_change_at as last_change_at,
         dcs.first_change_at as first_change_at,
         coalesce(ore.times_reassigned, 0) as times_reassigned, 
+        lra.lost_label,
         -- Activity Summary
         coalesce(act.total_activities, 0) as total_activities,
         coalesce(act.completed_activities, 0) as completed_activities,
@@ -143,6 +160,9 @@ final_combined as (
     left join activity_summary act on ls.deal_id = act.deal_id
     left join current_owner co on ls.deal_id = co.deal_id
     left join user_details ud on co.current_owner_id = ud.user_id
+    left join lost_reason_agg lra on lra.deal_id = fs.deal_id
+
+
 )
 select * from final_combined
 

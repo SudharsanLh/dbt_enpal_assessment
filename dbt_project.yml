@@ -40,7 +40,10 @@ models:
       +schema: ods
       +materialized: table
     master:
-      +schema: ods
+      +schema: master
+      +materialized: table
+    datamart:
+      +schema: datamart
       +materialized: table
     test_model:  
       +schema: pipedrive_analytics

@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: rep_sales_funnel_monthly
+    description: "Monthly sales funnel reporting model with KPI counts across all 9 pipeline stages plus activity completion metrics"
+    columns:
+      - name: month
+        description: "Month (first day of month) for grouping funnel metrics"
+        tests:
+          - not_null
+      - name: kpi_name
+        description: "Type of KPI (Deals Entered Stage or Activities Completed)"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Deals Entered Stage', 'Activities Completed']
+      - name: funnel_step
+        description: "Funnel step name (Step 1-9 or sub-steps 2.1, 3.1)"
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - 'Step 1: Lead Generation'
+                - 'Step 2: Qualified Lead'
+                - 'Step 2.1: Sales Call 1'
+                - 'Step 3: Needs Assessment'
+                - 'Step 3.1: Sales Call 2'
+                - 'Step 4: Proposal/Quote Preparation'
+                - 'Step 5: Negotiation'
+                - 'Step 6: Closing'
+                - 'Step 7: Implementation/Onboarding'
+                - 'Step 8: Follow-up/Customer Success'
+                - 'Step 9: Renewal/Expansion'
+      - name: deals_count
+        description: "Number of deals/activities in this funnel step for the month"

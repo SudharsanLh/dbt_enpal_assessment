@@ -1,0 +1,67 @@
+version: 2
+
+models:
+  - name: master_deal
+    description: "Aggregated master deal model capturing latest & first stage, current owner, lost reason, activities, and key metrics with monthly intervals"
+    columns:
+      - name: deal_id
+        description: "Unique identifier for the deal"
+        tests:
+          - not_null
+          - unique
+
+      - name: current_stage_id
+        description: "Current numeric stage ID of the deal"
+      - name: current_stage_name
+        description: "Name of the current stage"
+      - name: current_funnel_step
+        description: "Mapped funnel step name"
+
+      - name: latest_stage_change_at
+        description: "Timestamp of the most recent stage change"
+      - name: current_month
+        description: "Month of the most recent stage change"
+
+      - name: first_stage_id
+        description: "First stage ID the deal entered"
+      - name: first_stage_name
+        description: "Name of the first stage entered"
+      - name: first_stage_entered_at
+        description: "Timestamp when the deal first entered the pipeline"
+      - name: month_entered_pipeline
+        description: "Month when the deal entered the pipeline"
+
+      - name: current_owner_id
+        description: "User ID of current deal owner"
+      - name: current_owner_name
+        description: "Name of current deal owner"
+      - name: current_owner_email
+        description: "Email of current deal owner"
+
+      - name: total_field_changes
+        description: "Number of distinct fields changed on the deal"
+      - name: last_change_at
+        description: "Timestamp of last field change"
+      - name: first_change_at
+        description: "Timestamp of first field change"
+      - name: times_reassigned
+        description: "Number of user reassignment(s) of the deal"
+
+      - name: lost_label
+        description: "Label of the lost reason if applicable"
+
+      - name: total_activities
+        description: "Total number of activities related to the deal"
+      - name: completed_activities
+        description: "Number of completed activities"
+      - name: funnel_tracked_activities
+        description: "Number of activities tracked as part of the funnel (e.g., Sales Calls)"
+      - name: last_activity_date
+        description: "Timestamp of the last activity on the deal"
+      - name: unique_users_performed_activities
+        description: "Count of unique users who performed activities on the deal"
+
+      - name: days_in_current_stage
+        description: "Days deal stayed in current stage (current_date - latest stage change)"
+      - name: days_in_pipeline
+        description: "Days deal has been in pipeline (current_date - first stage entered)"
