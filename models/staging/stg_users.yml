@@ -1,0 +1,17 @@
+version: 2
+
+models:
+    - name: stg_users
+      description: "User details with clean naming"
+      columns:
+        - name: user_id
+          description: "Unique user identifier"
+          tests:
+            - not_null
+            - unique
+        - name: user_name
+          description: "User's full name"
+        - name: user_email
+          description: "User's email address"
+        - name: modified_at
+          description: "Timestamp of last modification"

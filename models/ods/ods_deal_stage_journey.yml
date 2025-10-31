@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: ods_deal_stage_journey
+    description: "Complete journey of deals through pipeline stages with funnel step mapping"
+    columns:
+      - name: deal_id
+        description: "Unique deal identifier"
+        tests:
+          - not_null
+      - name: change_time_at
+        description: "Timestamp of stage change"
+        tests:
+          - not_null
+      - name: stage_id
+        description: "Numeric stage ID (1-9)"
+        tests:
+          - not_null
+      - name: stage_name
+        description: "Human-readable stage name from stages lookup"
+      - name: funnel_step
+        description: "Mapped funnel step (Step 1 through Step 9)"
+      - name: month
+        description: "Month of stage change (first day of month for grouping)"
+      - name: stage_sequence
+        description: "Order/sequence of stages for a deal (1st, 2nd, 3rd stage entered, etc.)"

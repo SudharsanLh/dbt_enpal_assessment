@@ -1,0 +1,16 @@
+version: 2
+models:
+  - name: stg_activity_types
+    description: "Standardized activity types information"
+    columns:
+      - name: activity_type_id
+        description: "Unique ID for activity type"
+        tests:
+          - not_null
+          - unique
+      - name: activity_name
+        description: "Name of activity type"
+      - name: active
+        description: "Flag whether the activity type is active"
+      - name: activity_type
+        description: "Code/Type identifier for activity"

@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: ods_deal_activity_funnel
+    description: "All deal activities enriched with activity types and user information"
+    columns:
+      - name: activity_id
+        description: "Unique activity identifier"
+        tests:
+          - unique
+          - not_null
+      - name: deal_id
+        description: "Associated deal ID"
+      - name: activity_type
+        description: "Code for activity type (e.g., 'meeting', 'sc_2', 'follow_up')"
+      - name: activity_name
+        description: "Human-readable activity type name"
+      - name: funnel_step
+        description: "Mapped funnel step if tracked (Step 2.1, Step 3.1, or Other Activity)"
+      - name: is_funnel_tracked
+        description: "Boolean flag indicating if activity is part of funnel KPIs"
+      - name: assigned_to_user
+        description: "User ID who performed/assigned the activity"
+      - name: user_name
+        description: "Name of user who performed activity"
+      - name: is_completed
+        description: "Boolean flag if activity is marked as done"
+      - name: due_to
+        description: "Timestamp for planned activity date/time"
+      - name: month
+        description: "Month of activity (first day of month for grouping)"

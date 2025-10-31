@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: stg_stages
+    description: "Pipeline stages configuration"
+    columns:
+      - name: stage_id
+        description: "Unique stage identifier"
+        tests:
+          - not_null
+          - unique
+      - name: stage_name
+        description: "Descriptive stage name"

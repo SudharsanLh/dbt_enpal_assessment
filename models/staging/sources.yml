@@ -1,0 +1,26 @@
+version: 2
+
+
+sources:
+  - name: dwh_raw
+    description: "Raw Pipedrive CRM data loaded from CSV files"
+    database: postgres
+    schema: public  # This is your actual schema as shown in DBeaver
+    tables:
+      - name: activity
+        description: "Activities (calls, emails, meetings) associated with deals"
+      
+      - name: activity_types
+        description: "Types of activities available in Pipedrive"
+      
+      - name: deal_changes
+        description: "Historical changes to deals (stage transitions, field updates)"
+      
+      - name: fields
+        description: "Custom and system fields configuration"
+      
+      - name: stages
+        description: "Pipeline stages configuration"
+      
+      - name: users
+        description: "Pipedrive users (sales reps, managers)"

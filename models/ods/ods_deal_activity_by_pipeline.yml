@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: ods_deal_activity_by_pipeline
+    description: "Activities only for deals with recorded pipeline progression (filtered join)"
+    columns:
+      - name: activity_id
+        description: "Unique activity identifier"
+        tests:
+          - unique
+          - not_null
+      - name: deal_id
+        description: "Associated deal ID (guaranteed to be in pipeline)"
+      - name: activity_type
+        description: "Code for activity type"
+      - name: funnel_step
+        description: "Funnel step for activity"
+      - name: is_funnel_tracked
+        description: "Boolean flag for funnel tracking"
+      - name: month
+        description: "Month of activity"

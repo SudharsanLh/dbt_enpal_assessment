@@ -1,0 +1,17 @@
+version: 2
+models:
+  - name: stg_deal_changes
+    description: "Standardized deal change log capturing historical updates to deals including stage transitions."
+    columns:
+      - name: deal_id
+        description: "Unique identifier for the deal"
+        tests:
+          - not_null
+      - name: change_time_at
+        description: "Timestamp when the change occurred"
+        tests:
+          - not_null
+      - name: changed_field_key
+        description: "The specific field that was changed (e.g., 'stage_id', 'user_id')"
+      - name: new_value
+        description: "New value of the field after the change"

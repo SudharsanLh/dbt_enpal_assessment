@@ -1,0 +1,16 @@
+version: 2
+models:
+  - name: stg_fields
+    description: "Custom and system field configurations"
+    columns:
+      - name: field_id
+        description: "Unique field identifier"
+        tests:
+          - not_null
+          - unique
+      - name: field_key
+        description: "Key used to identify the field"
+      - name: field_name
+        description: "Descriptive field name"
+      - name: field_value_options
+        description: "Possible values for the field (often JSON)"

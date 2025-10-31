@@ -1,0 +1,22 @@
+version: 2  
+models:
+    - name: stg_activity
+      description: "Raw activity logs with clean column names"
+      columns:
+          - name: activity_id
+            description: "Unique activity ID"
+            tests:
+              - not_null
+              - unique
+          - name: activity_type
+            description: "Type code of the activity"
+          - name: assigned_to_user
+            description: "User ID assigned to the activity"
+          - name: deal_id
+            description: "Associated deal ID"
+            tests:
+              - not_null
+          - name: done
+            description: "Boolean flag if activity is completed"
+          - name: due_to
+            description: "Timestamp for planned activity date/time"
