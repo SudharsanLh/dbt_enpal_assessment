@@ -1,3 +1,4 @@
+Please find the contents of the project below.
 
 ## Table of Contents
 
@@ -12,7 +13,7 @@
 
 To build a scalable, maintainable analytics layer that transforms raw CRM data into actionable business intelligence. I have created a **monthly sales funnel reporting model** tracking deals across 9 pipeline stages plus sub-step KPIs (Sales Calls 1 & 2). This is essential for trend analysis and pipeline health monitoring.
 
-I have also created a complementary  **master deal model** that is highly as the single source of truth for deal attributes with deal_id as the primary key, with stage metrics, owner, activity metrics, and time KPI. It enriches deals with lost reasons and ownership history
+I have also created a complementary  **master deal model** that acts as the single source of truth for deal attributes with deal_id as the primary key, with stage metrics, owner, activity metrics, and time KPI. It enriches deals with lost reasons and ownership history
 
 **Primary Deliverable:** `rep_sales_funnel_monthly` - A reporting table with columns:
 - `month` - Monthly aggregation period
