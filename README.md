@@ -11,7 +11,7 @@ Please find the contents of the project below.
 
 ## Project Objective
 
-To build a scalable, maintainable analytics layer that transforms raw CRM data into actionable business intelligence. I have created a **monthly sales funnel reporting model** tracking deals across 9 pipeline stages plus sub-step KPIs (Sales Calls 1 & 2). This is essential for trend analysis and pipeline health monitoring.
+To build a scalable, maintainable analytics layer that transforms raw CRM data into actionable business intelligence. The project creates a **monthly sales funnel reporting model** tracking deals across 9 pipeline stages plus sub-step KPIs (Sales Calls 1 & 2). This enables month-over-month trend analysis and stage-level drill-down.
 
 I have also created a complementary  **master deal model** that acts as the single source of truth for deal attributes with deal_id as the primary key, with stage metrics, owner, activity metrics, and time KPI. It enriches deals with lost reasons and ownership history
 
@@ -25,7 +25,7 @@ I have also created a complementary  **master deal model** that acts as the sing
 
 ## Data Overview
 
-There are main 6 main source tables with some basic information below
+There are 6 main source tables with some basic information below
 
 ### Deals data & Period
 - **Time Range:** January 2024 - March 2025 
@@ -63,9 +63,9 @@ I have used a 4-layer model whose purpose are given below
 
 ## Data Modeling Approach
 
-The project employs a star schema design with rep_sales_funnel_monthly as the fact table (granularity: monthly, measures: deals_count by kpi_name and funnel_step) and master_deal, master_user as dimension tables capturing deal attributes and user performance metrics respectively. Each model follows the single responsibility principle—staging layers clean and standardize, ODS layers integrate and enrich, master layers aggregate by entity (deal_id, user_id), and reporting layers aggregate by time period (month). 
-
-All models are materialized as tablesand frequently filtered columns (deal_id, stage_id, user_id, month) for query performance. Deal ownership tracking captures reassignments with current owner derived from the latest user_id assignment, while activity attribution maintains both performer and deal owner relationships for comprehensive funnel analysis.
+### Star Schema Design
+- **Fact Table:** `rep_sales_funnel_monthly` (monthly aggregation, measures: deals_count)
+- **Dimension Tables:** `master_deal`, `master_user` (deal/user attributes)
 
 ### Data Lineage
 Rep_sales_funnel_monthly lineage
@@ -95,7 +95,7 @@ Master_data lineage
 
 #### 4. All deals have lost label
 - **Issue:** From above point, master_deal table shows all deal have lost label even though deals were closed.
-- **Solution:** This needs to be either cleaned-up for closed deals or investigated if there is a CRM issue
+- **Solution:** This needs to be either cleaned-up for closed deals or investigated if there is a CRM issue. Add closed_won_label field to differentiate from lost_label is a resolve.
 
 
 
@@ -112,6 +112,8 @@ Uniqueness Tests, not Null Tests, accepted_values, custom Expression Tests
 3. Impact of Sales call activities are visible in the conversion funnel - 77%-85% completion rate
 4. Seasonality of lead generation - very high leads between April to August 2024
 5. Average pipeline duration is approximately 500 days, which requires more process optimisation from generation to closure/loss
-6. Nearly 25% of the deals have been reassigned to a new owner (more than 2 user assignments
+6. Nearly 25% of the deals have been reassigned to a new owner (more than 2 user assignments)
+
+   
 
 
